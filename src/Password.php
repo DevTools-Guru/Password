@@ -93,6 +93,10 @@ final class Password
      * Find a decent default cost value for the server.
      * Taken from: http://php.net/manual/en/function.password-hash.php
      *
+     * Ignore this static function since what it produces
+     * will always depend upon the environment it is ran in.
+     * @codeCoverageIgnore
+     *
      * @param float $targetTime
      *
      * @return int

@@ -51,4 +51,20 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
         self::assertTrue($password->verify('BadPassword'));
         self::assertFalse($password->verify('NotThePassword'));
     }
+
+    public function testAlgorithmIsInterpreted()
+    {
+        $password = new Password('hello');
+        self::assertSame(PASSWORD_DEFAULT, $password->getAlgorithm());
+    }
+
+    public function testCostIsReturned()
+    {
+        $password = new Password('hello');
+        self::assertSame(10, $password->getCost());
+
+        $password = new Password('hello', 15);
+        $testPassword = new Password($password->getHash());
+        self::assertSame(15, $testPassword->getCost());
+    }
 }
