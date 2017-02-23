@@ -3,7 +3,6 @@
     "type": "library",
     "description": "Password object for PHP",
     "keywords": [
-        "DevToolsGuru",
         "Password"
     ],
     "homepage": "https://github.com/DevToolsGuru/Password",
@@ -17,10 +16,10 @@
         }
     ],
     "require": {
-        "php" : "~5.6|~7.0"
+        "php" : "~7.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "~4.0||~5.0",
+        "phpunit/phpunit" : "~5.7",
         "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
@@ -30,7 +29,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DevToolsGuru\\Password\\": "tests"
+            "DevToolsGuru\\Password\\Tests\\": "tests"
         }
     },
     "scripts": {
