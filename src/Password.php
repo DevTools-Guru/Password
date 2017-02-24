@@ -1,6 +1,6 @@
 <?php
 
-namespace DevToolsGuru\Password;
+namespace DevToolsGuru;
 
 final class Password
 {
@@ -31,7 +31,7 @@ final class Password
      * @param string $value
      * @param int $cost
      *
-     * @throws \InvalidArgumentException
+     * @throws \DevToolsGuru\Password\ExcessiveLengthException
      */
     public function __construct(string $value, int $cost = 10)
     {
@@ -43,7 +43,7 @@ final class Password
         if (self::$errorOnExcessiveLength &&
             $this->hasMaxLength(PASSWORD_DEFAULT) &&
             strlen($value) >= self::MAX_LENGTHS[PASSWORD_DEFAULT]) {
-            $exception = new ExcessiveLengthException();
+            $exception = new Password\ExcessiveLengthException();
             $exception->setMaxLength(self::MAX_LENGTHS[PASSWORD_DEFAULT]);
             throw $exception;
         }

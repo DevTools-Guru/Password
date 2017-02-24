@@ -2,7 +2,7 @@
 
 namespace DevToolsGuru\Password\Tests;
 
-use DevToolsGuru\Password\Password;
+use DevToolsGuru\Password;
 use DevToolsGuru\Password\ExcessiveLengthException;
 
 class PasswordTest extends \PHPUnit_Framework_TestCase
