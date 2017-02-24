@@ -43,9 +43,10 @@ $ composer test
 Please see [CONTRIBUTING](https://gitlab.com/DevTools-Guru/Password/blob/master/CONTRIBUTING.md) and 
 [CONDUCT](https://gitlab.com/DevTools-Guru/Password/blob/master/CONDUCT.md) for details.
 
-## Security
+## Github READONLY Mirror
 
-If you discover any security related issues, please email jonathan@garbee.me instead of using the issue tracker.
+The GitHub repository is a **READONLY** mirror of the repository.
+Please see the [Gitlab](https://gitlab.com/DevTools-Guru/Password) repository to make contributions.
 
 ## Credits
 
@@ -54,7 +55,7 @@ If you discover any security related issues, please email jonathan@garbee.me ins
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://gitlab.com/DevTools-Guru/Password/blob/master/LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/DevToolsGuru/Password.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square

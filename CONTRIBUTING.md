@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/DevToolsGuru/Password).
+We accept contributions via Pull Requests on [Gitlab](https://gitlab.com/DevTools-Guru/Password).
 
 
 ## Pull Requests
