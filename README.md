@@ -23,6 +23,10 @@ $password = new DevToolsGuru\Password('WhateverTheUserProvides');
 echo $password->getHash();
 ```
 
+For more usage information see the documentation:
+* [API](docs/api.md)
+* [Usage](docs/usage.md)
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
@@ -52,15 +56,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/DevToolsGuru/Password.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/DevToolsGuru/Password/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/DevToolsGuru/Password.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/DevToolsGuru/Password.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/DevToolsGuru/Password.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/DevToolsGuru/Password
-[link-travis]: https://travis-ci.org/DevToolsGuru/Password
-[link-scrutinizer]: https://scrutinizer-ci.com/g/DevToolsGuru/Password/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/DevToolsGuru/Password
 [link-downloads]: https://packagist.org/packages/DevToolsGuru/Password
 [link-author]: https://github.com/Garbee
-[link-contributors]: ../../contributors
+[link-contributors]: ../../graphs/master
