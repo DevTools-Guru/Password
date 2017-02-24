@@ -24,12 +24,13 @@ echo $password->getHash();
 ```
 
 For more usage information see the documentation:
-* [API](docs/api.md)
-* [Usage](docs/usage.md)
+* [API](https://gitlab.com/DevTools-Guru/Password/blob/master/docs/API.md)
+* [Usage](https://gitlab.com/DevTools-Guru/Password/blob/master/docs/Usage.md)
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](https://gitlab.com/DevTools-Guru/Password/blob/master/CHANGELOG.md) for more information 
+on what has changed recently.
 
 ## Testing
 
@@ -39,7 +40,8 @@ $ composer test
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+Please see [CONTRIBUTING](https://gitlab.com/DevTools-Guru/Password/blob/master/CONTRIBUTING.md) and 
+[CONDUCT](https://gitlab.com/DevTools-Guru/Password/blob/master/CONDUCT.md) for details.
 
 ## Security
 
@@ -58,7 +60,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/DevToolsGuru/Password.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/DevToolsGuru/Password
-[link-downloads]: https://packagist.org/packages/DevToolsGuru/Password
+[link-packagist]: https://packagist.org/packages/devtoolsguru/password
+[link-downloads]: https://packagist.org/packages/devtoolsguru/password
 [link-author]: https://github.com/Garbee
-[link-contributors]: ../../graphs/master
+[link-contributors]: https://gitlab.com/DevTools-Guru/Password/graphs/master
