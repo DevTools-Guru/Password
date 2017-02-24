@@ -26,23 +26,26 @@ final class Password
     private $algorithm;
 
     /**
-     * Password constructor.
+     * Create a new password from the provided $value.
+     * You may provide a $cost to increase the difficulty when making a new hash if needed.
      *
      * @param string $value
      * @param int $cost
      *
      * @throws \DevToolsGuru\Password\ExcessiveLengthException
      */
-    public function __construct(string $value, int $cost = 10)
+    public function __construct($value, $cost = 10)
     {
         if (in_array(password_get_info($value)['algo'], array_values(self::AVAILABLE_ALGORITHMS), true)) {
             $this->setProps($value);
+
             return;
         }
 
         if (self::$errorOnExcessiveLength &&
-            $this->hasMaxLength(PASSWORD_DEFAULT) &&
-            strlen($value) >= self::MAX_LENGTHS[PASSWORD_DEFAULT]) {
+            self::hasMaxLength(PASSWORD_DEFAULT) &&
+            strlen($value) >= self::MAX_LENGTHS[PASSWORD_DEFAULT]
+        ) {
             $exception = new Password\ExcessiveLengthException();
             $exception->setMaxLength(self::MAX_LENGTHS[PASSWORD_DEFAULT]);
             throw $exception;
@@ -51,7 +54,12 @@ final class Password
         $this->setProps(password_hash($value, PASSWORD_DEFAULT, ['cost' => $cost]));
     }
 
-    private function setProps(string $value)
+    /**
+     * Helper method for setting the values when creating the object.
+     *
+     * @param string $value
+     */
+    private function setProps($value)
     {
         $info = password_get_info($value);
         $this->hash = $value;
@@ -59,32 +67,71 @@ final class Password
         $this->algorithm = $info['algo'];
     }
 
-    public function getHash() : string
+    /**
+     * Get the full hash of the password.
+     *
+     * @return string
+     */
+    public function getHash()
     {
         return $this->hash;
     }
 
-    public function getCost() : int
+    /**
+     * Get the cost used to hash the password.
+     *
+     * @return int
+     */
+    public function getCost()
     {
         return $this->cost;
     }
 
-    public function getAlgorithm() : int
+    /**
+     * Get the algorithm identifier used to hash the password.
+     *
+     * @return int
+     */
+    public function getAlgorithm()
     {
         return $this->algorithm;
     }
 
-    public function verify(string $plainText) : bool
+    /**
+     * Verify the stored hash is equal to the provided value.
+     *
+     * @param string $plainText
+     *
+     * @return bool
+     */
+    public function verify($plainText)
     {
         return password_verify($plainText, $this->hash);
     }
 
-    public function needsRehash(int $cost = 10) : bool
+    /**
+     * See if the stored hash needs to be rehashed.
+     * This can be because the given cost is greater
+     * or because it is no longer hashed with the default algorithm.
+     *
+     * @param int $cost
+     *
+     * @return bool
+     */
+    public function needsRehash($cost = 10)
     {
         return password_needs_rehash($this->hash, PASSWORD_DEFAULT, ['cost' => $cost]);
     }
 
-    public function hasMaxLength(int $hashMethod): bool
+    /**
+     * See if the given algorithm has a known length
+     * where value inputs get ignored.
+     *
+     * @param int $hashMethod
+     *
+     * @return bool
+     */
+    public static function hasMaxLength($hashMethod)
     {
         return array_key_exists($hashMethod, self::MAX_LENGTHS);
     }
@@ -95,19 +142,20 @@ final class Password
      *
      * Ignore this static function since what it produces
      * will always depend upon the environment it is ran in.
+     *
      * @codeCoverageIgnore
      *
      * @param float $targetTime
      *
      * @return int
      */
-    public static function getAppropriateCostValue(float $targetTime = 0.05) : int
+    public static function getAppropriateCostValue($targetTime = 0.05)
     {
         $cost = 8;
         do {
             $cost++;
             $start = microtime(true);
-            password_hash("test", PASSWORD_DEFAULT, ["cost" => $cost]);
+            password_hash('test', PASSWORD_DEFAULT, ['cost' => $cost]);
             $end = microtime(true);
         } while (($end - $start) < $targetTime);
 
