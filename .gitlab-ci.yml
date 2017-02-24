@@ -9,7 +9,7 @@ before_script:
 
 test:
   script:
-  - composer test
+  - composer testWithStan
 
 after_script:
   - bash <(curl -s https://codecov.io/bash) -f build/logs/clover.xml
