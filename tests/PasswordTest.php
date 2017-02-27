@@ -55,16 +55,22 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     public function testAlgorithmIsInterpreted()
     {
         $password = new Password('hello');
-        self::assertSame(PASSWORD_DEFAULT, $password->getAlgorithm());
+        self::assertSame(PASSWORD_DEFAULT, $password->getInfo()->getAlgorithm());
     }
 
     public function testCostIsReturned()
     {
         $password = new Password('hello');
-        self::assertSame(10, $password->getCost());
+        self::assertSame(10, $password->getInfo()->getCost());
 
         $password = new Password('hello', 15);
         $testPassword = new Password($password->getHash());
-        self::assertSame(15, $testPassword->getCost());
+        self::assertSame(15, $testPassword->getInfo()->getCost());
+    }
+
+    public function testAlgorithmNameIsReturned()
+    {
+        $password = new Password('hello');
+        self::assertSame('bcrypt', $password->getInfo()->getAlgorithmName());
     }
 }

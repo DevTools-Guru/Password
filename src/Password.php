@@ -2,6 +2,8 @@
 
 namespace DevToolsGuru;
 
+use DevToolsGuru\Password\Info;
+
 final class Password
 {
     const AVAILABLE_ALGORITHMS = [
@@ -19,11 +21,8 @@ final class Password
     /** @var string $hash */
     private $hash;
 
-    /** @var int $cost */
-    private $cost;
-
-    /** @var int $algorithm */
-    private $algorithm;
+    /** @var Info $info */
+    private $info;
 
     /**
      * Create a new password from the provided $value.
@@ -36,7 +35,11 @@ final class Password
      */
     public function __construct($value, $cost = 10)
     {
-        if (in_array(password_get_info($value)['algo'], array_values(self::AVAILABLE_ALGORITHMS), true)) {
+        if (in_array(
+            password_get_info($value)['algo'],
+            array_values(self::AVAILABLE_ALGORITHMS),
+            true)
+        ) {
             $this->setProps($value);
 
             return;
@@ -51,7 +54,13 @@ final class Password
             throw $exception;
         }
 
-        $this->setProps(password_hash($value, PASSWORD_DEFAULT, ['cost' => $cost]));
+        $this->setProps(password_hash(
+            $value,
+            PASSWORD_DEFAULT,
+            [
+                'cost' => $cost,
+            ]
+        ));
     }
 
     /**
@@ -61,10 +70,8 @@ final class Password
      */
     private function setProps($value)
     {
-        $info = password_get_info($value);
         $this->hash = $value;
-        $this->cost = $info['options']['cost'] ?? 10;
-        $this->algorithm = $info['algo'];
+        $this->info = new Info($value);
     }
 
     /**
@@ -77,24 +84,15 @@ final class Password
         return $this->hash;
     }
 
-    /**
-     * Get the cost used to hash the password.
-     *
-     * @return int
-     */
-    public function getCost()
-    {
-        return $this->cost;
-    }
 
     /**
-     * Get the algorithm identifier used to hash the password.
+     * Get the password hash information.
      *
-     * @return int
+     * @return \DevToolsGuru\Password\Info
      */
-    public function getAlgorithm()
+    public function getInfo()
     {
-        return $this->algorithm;
+        return $this->info;
     }
 
     /**
@@ -120,7 +118,13 @@ final class Password
      */
     public function needsRehash($cost = 10)
     {
-        return password_needs_rehash($this->hash, PASSWORD_DEFAULT, ['cost' => $cost]);
+        return password_needs_rehash(
+            $this->hash,
+            PASSWORD_DEFAULT,
+            [
+                'cost' => $cost,
+            ]
+        );
     }
 
     /**
@@ -145,7 +149,7 @@ final class Password
      *
      * @codeCoverageIgnore
      *
-     * @param float $targetTime
+     * @param float $targetTime Target time in seconds to hash a password.
      *
      * @return int
      */

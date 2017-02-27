@@ -20,7 +20,7 @@ If it does, then the `\DevToolsGuru\Password\ExcessiveLengthException` will be t
 This can be turned off in your application by doing the following at any point before instantiation:
 
 ```php
-Password::$errorOnExcessiveLength = false;
+\DevToolsGuru\Password::$errorOnExcessiveLength = false;
 ```
 
 #### Methods
@@ -33,20 +33,12 @@ Get the stored hash.
 $password->getHash();
 ```
 
-##### getCost() : int
+##### getInfo() : \DevToolsGuru\Password\Info
 
-Get the cost used to hash the password.
-
-```php
-$password->getCost();
-```
-
-##### getAlgorithm() : int
-
-Get the algorithm identifier used to hash the password.
+Get the password info object for the hash.
 
 ```php
-$password->getAlgorithm();
+$password->getInfo();
 ```
 
 ##### verify(string $plainText) : bool
@@ -83,4 +75,36 @@ Only check the hardware once and store the output.
 
 ```php
 \DevToolsGuru\Password::getAppropriateCostValue(0.09); // Checking for 900ms hash time
+```
+
+### DevToolsGuru\Password\Info
+
+The Info class provides the data from `password_get_info` in an object form.
+The `salt` option is not handled since it is deprecated as of 7.0.
+
+#### Methods
+
+##### getCost() : int
+
+Get the cost used to hash the password.
+
+```php
+$info->getCost();
+```
+
+##### getAlgorithm() : int
+
+Get the algorithm identifier used to hash the password.
+
+```php
+$info->getAlgorithm();
+```
+
+##### getAlgorithmName() : string
+
+Get the algorithm's named used to hash the password.
+Returns 'unknown' if the hash was not a valid hash.
+
+```php
+$info->getAlgorithmName();
 ```
