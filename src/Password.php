@@ -7,8 +7,8 @@ use DevToolsGuru\Password\Info;
 final class Password
 {
     const AVAILABLE_ALGORITHMS = [
-        PASSWORD_DEFAULT,
-        PASSWORD_BCRYPT,
+        1, // PASSWORD_BCRYPT,
+        2, // PASSWORD_ARGON2I
     ];
 
     const MAX_LENGTHS = [
@@ -17,6 +17,9 @@ final class Password
 
     /** @var bool $errorOnExcessiveLength */
     public static $errorOnExcessiveLength = true;
+
+    /** @var int $hashAlgorithm */
+    public static $hashAlgorithm = PASSWORD_DEFAULT;
 
     /** @var string $hash */
     private $hash;
@@ -38,8 +41,8 @@ final class Password
         if (in_array(
             password_get_info($value)['algo'],
             array_values(self::AVAILABLE_ALGORITHMS),
-            true)
-        ) {
+            true
+        )) {
             $this->setProps($value);
 
             return;
@@ -54,13 +57,9 @@ final class Password
             throw $exception;
         }
 
-        $this->setProps(password_hash(
-            $value,
-            PASSWORD_DEFAULT,
-            [
+        $this->setProps(password_hash($value, self::$hashAlgorithm, [
                 'cost' => $cost,
-            ]
-        ));
+            ]));
     }
 
     /**
